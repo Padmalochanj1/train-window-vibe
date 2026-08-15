@@ -17,6 +17,8 @@ let rainyTrainYTReady = false;
 let rainyTrainMusicPlaying = false;
 let rainyTrainMusicVolume = 40;
 let rainyTrainMasterVolume = 60;
+let rainyTrainPendingPlay = false;
+let rainyTrainConsecutiveErrors = 0;
 
 function onYouTubeIframeAPIReady() {
   rainyTrainYT = new YT.Player('youtube-player', {
@@ -44,14 +46,20 @@ function onYouTubeIframeAPIReady() {
 function onRainyTrainYTReady(event) {
   rainyTrainYTReady = true;
   applyRainyTrainMusicVolume();
-  setRainyTrainYTStatus('Ready — press play to begin the journey');
   updateRainyTrainNowPlayingTitle();
+  if (rainyTrainPendingPlay) {
+    rainyTrainPendingPlay = false;
+    rainyTrainYT.playVideo();
+  } else {
+    setRainyTrainYTStatus('Ready — press play to begin the journey');
+  }
 }
 
 function onRainyTrainYTStateChange(event) {
   if (!window.YT) return;
   if (event.data === YT.PlayerState.PLAYING) {
     rainyTrainMusicPlaying = true;
+    rainyTrainConsecutiveErrors = 0;
     setRainyTrainYTStatus('Playing ambient music');
     syncRainyTrainPlayButton(true);
     setRainyTrainRadioCardPlaying(true);
@@ -84,6 +92,11 @@ function setRainyTrainRadioCardPlaying(isPlaying) {
 
 function onRainyTrainYTError(event) {
   console.warn('Rainy Train YouTube error:', event.data);
+  rainyTrainConsecutiveErrors++;
+  if (rainyTrainConsecutiveErrors >= 8) {
+    setRainyTrainYTStatus('This playlist won\u2019t play here (likely blocked from embedding). Try a different playlist.');
+    return;
+  }
   setRainyTrainYTStatus(`Track unavailable — skipping (error ${event.data})`);
   if (rainyTrainYTReady) rainyTrainYT.nextVideo();
 }
@@ -110,6 +123,7 @@ function applyRainyTrainMusicVolume() {
 
 function rainyTrainPlayMusic() {
   if (!rainyTrainYTReady) {
+    rainyTrainPendingPlay = true;
     setRainyTrainYTStatus('Loading YouTube…');
     return;
   }
@@ -117,12 +131,24 @@ function rainyTrainPlayMusic() {
 }
 
 function rainyTrainPauseMusic() {
-  if (!rainyTrainYTReady) return;
+  if (!rainyTrainYTReady) {
+    rainyTrainPendingPlay = false;
+    return;
+  }
   rainyTrainYT.pauseVideo();
 }
 
 function rainyTrainToggleMusic() {
-  if (!rainyTrainYTReady) return;
+  if (!rainyTrainYTReady) {
+    // Not loaded yet — queue play so it starts the moment it's ready,
+    // instead of the button silently doing nothing.
+    if (rainyTrainPendingPlay) {
+      rainyTrainPendingPlay = false;
+    } else {
+      rainyTrainPlayMusic();
+    }
+    return;
+  }
   const state = rainyTrainYT.getPlayerState();
   if (state === YT.PlayerState.PLAYING) rainyTrainPauseMusic();
   else rainyTrainPlayMusic();
