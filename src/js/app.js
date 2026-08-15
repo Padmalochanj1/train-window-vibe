@@ -35,4 +35,4 @@ function updateOnlineUsers() {
 
 updateOnlineUsers();
 
-setInterval(updateOnlineUsers, 30000);
+setInterval(updateOnlineUsers, 15);
