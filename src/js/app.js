@@ -17,3 +17,22 @@ $('#fullscreenBtn').onclick=()=>document.fullscreenElement?document.exitFullscre
 const quotes=['“Window seat, warm chai, no signal. Perfect.”','“The rain sounds better through a train window.”','“Four hours left. I’m in no hurry at all.”','“Every station looks prettier when it’s raining.”'];let qi=0;
 $('#quoteCard').onclick=()=>{$('#quoteText').textContent=quotes[++qi%quotes.length]};
 resize();clock();setInterval(clock,1000);rain();
+let onlineUsers = Math.floor(Math.random() * 1001) + 500;
+
+function updateOnlineUsers() {
+    const change = Math.floor(Math.random() * 21) - 10;
+
+    onlineUsers += change;
+
+    onlineUsers = Math.max(500, Math.min(1500, onlineUsers));
+
+    const counter = document.getElementById("online-count");
+
+    if (counter) {
+        counter.textContent = onlineUsers;
+    }
+}
+
+updateOnlineUsers();
+
+setInterval(updateOnlineUsers, 30000);
