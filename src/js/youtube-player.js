@@ -6,7 +6,7 @@ const RAINY_TRAIN_YOUTUBE = {
   musicPlaylistId: 'PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4',
   musicPlaylistUrl: 'https://music.youtube.com/playlist?list=PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4',
   trainVideoId: 'ImOSLdLSA5Q',
-  trainVolume: 20
+  trainVolume: 10
 };
 
 let musicYT = null;
