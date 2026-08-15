@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suhana Safar — Window Seat Rain Ambient</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for retro-minimal look -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. Layered Background Frame -->
+    <div class="window-viewport">
+        <!-- Background Scenery (Looping video or high-res image) -->
+        <div class="scenery-layer"></div>
+        
+        <!-- Interactive Rain Drop Glass Physics Layer -->
+        <canvas id="rain-glass-engine"></canvas>
+        
+        <!-- CRT/Vignette Cinematic Filter Overlay -->
+        <div class="cinematic-overlay"></div>
+    </div>
+
+    <!-- 2. Glassmorphic User Interface HUD -->
+    <main class="hud-container">
+        <header class="hud-header">
+            <span class="badge blinking">● LIVE CONNECTION</span>
+            <div class="passenger-counter"><span id="live-count">87</span> passengers aboard</div>
+        </header>
+
+        <section class="now-playing-card">
+            <h1 class="brand-title">सुहाना सफर</h1>
+            <p class="station-log">En Route • Outer Signal Network Loss</p>
+            
+            <div class="track-meta">
+                <span id="track-title">JOURNEY NOT STARTED</span>
+                <span id="track-artist">Click enter to start streaming</span>
+            </div>
+
+            <!-- Custom Progress Bar -->
+            <div class="progress-wrapper">
+                <div id="progress-bar" class="progress-fill"></div>
+            </div>
+        </section>
+
+        <footer class="hud-controls">
+            <button id="btn-prev" class="ctrl-btn sub-btn" aria-label="Previous Track">⏮</button>
+            <button id="btn-toggle" class="ctrl-btn main-action-btn">ENTER TRAIN</button>
+            <button id="btn-next" class="ctrl-btn sub-btn" aria-label="Next Track">⏭</button>
+        </footer>
+    </main>
+
+    <!-- 3. Hidden Audio/Video Micro-Engines -->
+    <div id="hidden-youtube-player"></div>
+    <!-- Layered high-fidelity rain texture audio -->
+    <audio id="ambient-rain" loop preload="auto" src="https://mixkit.co"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
