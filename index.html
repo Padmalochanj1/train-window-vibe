@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<title>Rainy Train</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/css/main.css">
+</head>
+<body>
+<div id="app" class="app">
+  <div class="scene" aria-hidden="true">
+    <img class="scene-image" src="assets/train-window.png" alt="">
+    <div class="scene-tint"></div>
+    <canvas id="rainCanvas"></canvas>
+    <div class="vignette"></div>
+  </div>
+
+  <header class="topbar">
+    <div>
+      <div class="brand-script">Rainy Train</div>
+      <div class="tagline">slow down, you're not late.</div>
+    </div>
+    <button id="favoriteBtn" class="heart" aria-label="Favorite">♡</button>
+  </header>
+
+  <main class="simple-main">
+    <section class="hero-simple">
+      <div class="info">
+        <div class="eyebrow">A QUIET JOURNEY</div>
+        <h1>Rain on the window.<br><em>Nothing else to do.</em></h1>
+        <p>Put on your headphones and let the train keep moving.</p>
+      </div>
+
+      <div class="status-card">
+        <div class="clock" id="clock">07:42PM</div>
+        <div class="date" id="date">Saturday, 15 August 2026</div>
+        <div class="line"></div>
+        <div class="station-label">NEXT STATION</div>
+        <strong id="nextStation">Silent Valley</strong>
+        <small id="distance">12 km to go</small>
+      </div>
+    </section>
+
+    <section class="player">
+      <div id="youtube-player" class="yt-audio-only" aria-hidden="true"></div>
+      <div id="train-player" class="yt-audio-only" aria-hidden="true"></div>
+      <div class="now-playing">
+        <div class="equalizer"><i></i><i></i><i></i><i></i></div>
+        <div>
+          <span class="label">NOW PLAYING</span>
+          <strong id="youtubeTitle">Rainy Train Playlist</strong>
+          <small id="youtubeStatus">Press play to begin</small>
+        </div>
+      </div>
+
+      <div class="controls music-controls" aria-label="Music controls">
+        <button id="previousBtn" class="disc-btn" aria-label="Previous track">⏮</button>
+        <button id="playBtn" class="play-btn" aria-label="Play or pause">▶</button>
+        <button id="nextBtn" class="disc-btn" aria-label="Next track">⏭</button>
+        <button id="shuffleBtn" class="disc-btn" aria-label="Shuffle playlist">🔀</button>
+        <button id="repeatBtn" class="disc-btn" aria-label="Repeat playlist">🔁</button>
+      </div>
+
+      <div class="music-volume">
+        <label for="musicRange">Music volume</label>
+        <input id="musicRange" type="range" min="0" max="100" value="40" aria-label="Music volume">
+        <b id="musicPct">40%</b>
+      </div>
+    </section>
+
+    <button class="quote" id="quoteCard">
+      <span>A FELLOW TRAVELLER SAYS</span>
+      <b id="quoteText">“Window seat, warm chai, no signal. Perfect.”</b>
+    </button>
+  </main>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="src/js/youtube-player.js"></script>
+<script src="src/js/app.js"></script>
+</body>
+</html>
